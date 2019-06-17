@@ -9,7 +9,7 @@ install:
 script:
   - npm run test
   - npm run build
-  - now --token=$ZEIT_TOKEN -e BOT_TOKEN=$BOT_TOKEN
+  - now --token=$ZEIT_KEY -e BOT_TOKEN=$BOT_TOKEN
 deploy:
   provider: pages
   skip-cleanup: true
