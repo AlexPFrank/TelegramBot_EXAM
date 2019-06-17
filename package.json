@@ -21,7 +21,6 @@
   "homepage": "https://github.com/AlexPFrank/TelegramBot_EXAM",
   "dependencies": {
     "node-telegram-bot-api": "^0.30.0",
-    "request": "^2.86.0",
-    "utf-8-validate": "^5.0.2"
+    "request": "^2.86.0"
   }
 }
