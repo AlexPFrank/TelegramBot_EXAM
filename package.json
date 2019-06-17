@@ -8,7 +8,6 @@
     "start": "node index.js",
     "deploy": "echo Current branch: $TRAVIS_BRANCH",
     "build": "",
-    "test": "vows --spec"
   },
   "repository": {
     "type": "git",
