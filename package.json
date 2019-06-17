@@ -15,3 +15,26 @@
     "request": "^2.88.0"
   }
 }
+{
+  "name": "start",
+  "version": "1.0.0",
+  "description": "Exam node Frankov",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "deploy": "echo Current branch: $TRAVIS_BRANCH",
+    "build": "",
+    "test": "echo \"Error: no test specified\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexPFrank/TelegramBot_EXAM.git"
+  },
+  "author": "Frankov Alexandr",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexPFrank/TelegramBot_EXAM/issues"
+  },
+  "homepage": "https://github.com/AlexPFrank/TelegramBot_EXAM",
+  "dependencies": {}
+}
