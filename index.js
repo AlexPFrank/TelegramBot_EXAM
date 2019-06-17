@@ -1,21 +1,61 @@
 const TelegramBot = require('node-telegram-bot-api');
+const request = require('request');
+const config = require('./config.json');
 
-// Устанавливаем токен, который выдавал нам бот.
-var token = 'ТУТ_ВСТАВЛЯЕМ_ТОКЕН';
-// Включить опрос сервера
-var bot = new TelegramBot(token, {polling: true});
 
-// Написать мне ... (/echo Hello World! - пришлет сообщение с этим приветствием.)
-bot.onText(/echo (.+)/, function (msg, match) {
-    var fromId = msg.from.id;
-    var resp = match[1];
-    bot.sendMessage(fromId, resp);
+
+const admin = require('firebase-admin');
+const serviceAccount = require('./serviceAccountKey.json');
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
+const db = admin.firestore();
+
+
+
+
+const token = config.token;
+
+const bot = new TelegramBot(token, {polling: true});
+
+
+bot.onText(/\/start/,(msg, match) => {
+  const chatId = msg.chat.id;
+  bot.sendMessage(chatId, 'Выберите валюту, которая вас интересует:', {
+    reply_markup: {
+      inline_keyboard: [
+        [
+          {
+            text: '€ - EUR',
+            callback_data: 'EUR'
+          },
+          {
+            text: '$ - USD',
+            callback_data: 'USD'
+          },
+          {
+            text: '₽ - RUR',
+            callback_data: 'RUR'
+          },
+          {
+            text: '₿ - BTC',
+            callback_data: 'BTC'
+          }
+        ]
+      ]
+    }
+  });
 });
 
-// Простая команда без параметров.
-bot.on('message', function (msg) {
-    var chatId = msg.chat.id;
-    // Фотография может быть: путь к файлу, поток(stream) или параметр file_id
-    var photo = 'cats.png';
-    bot.sendPhoto(chatId, photo, {caption: 'Милые котята'});
+bot.on('callback_query', query => {
+  const id = query.message.chat.id;
+  request('https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5', function(error, response, body){
+    const data = JSON.parse(body);
+    const result = data.filter(item => item.ccy === query.data)[0];
+    let md = `
+    *${result.ccy} => ${result.base_ccy}*
+    Купля: _${result.buy}_
+    Продажа: _${result.sale}_ `;
+    bot.sendMessage(id, md, {parse_mode: 'Markdown'});
+  });
 });
