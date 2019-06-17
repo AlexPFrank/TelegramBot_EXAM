@@ -2,6 +2,8 @@ language: node_js
 
 cache:
   - npm
-script:
-  - npm install:nyan
-  - npm run test:nyan
+before_install:
+  - npm i -g npm@version-number
+before_script:
+  - npm install -g gulp-cli
+script: gulp
