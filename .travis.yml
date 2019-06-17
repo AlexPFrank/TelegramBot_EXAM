@@ -3,5 +3,5 @@ language: node_js
 cache:
   - npm
 script:
-  - npm install
-  - npm run test
+  - npm install:nyan
+  - npm run test:nyan
