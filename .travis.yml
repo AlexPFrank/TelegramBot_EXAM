@@ -1,1 +1,10 @@
 language: node_js
+node_js:
+  - "10"
+cache:
+  - npm
+before_script:
+  - npm ci
+script: 
+  - npm run test
+  - npm run deploy
