@@ -1,9 +1,7 @@
 language: node_js
-node_js:
-  - "10"
+
 cache:
   - npm
-before_sctipt:
-  - npm install --save node-telegram-bot-api
-script: 
+script:
+  - npm install
   - npm run test
