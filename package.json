@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node index.js",
     "deploy": "echo Current branch: $TRAVIS_BRANCH",
-    "build": "",
+    "build": ""
   },
   "repository": {
     "type": "git",
