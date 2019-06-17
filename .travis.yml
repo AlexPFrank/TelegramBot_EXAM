@@ -4,7 +4,7 @@ node_js:
 cache: yarn
 
 install:
-  - yarn ci
+  - yarn install
   
 script:
   - yarn test
@@ -15,4 +15,4 @@ deploy:
   skip-cleanup: true
   github-token: $GITHUB_TOKEN
   on:
-    branch: gh-pages
+    branch: master
