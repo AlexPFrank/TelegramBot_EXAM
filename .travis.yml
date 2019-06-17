@@ -5,4 +5,3 @@ cache:
   - npm
 script: 
   - npm run test
-  - npm run deploy
