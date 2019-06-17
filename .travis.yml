@@ -1,12 +1,18 @@
 language: node_js
-node_js:
-  - "10"
-cache:
-  - npm
-before_script:
-  - npm ci
-script: 
-  - npm run lint
-  - npm run test
-  - npm run deploy
-  - now alias --token=$ZEIT_KEY -V 2 node-labs-execution-$TRAVIS_BRANCH
+node_js: 
+  - 11.6.0
+cache: yarn
+
+install:
+  - yarn ci
+  
+script:
+  - yarn test
+  - yarn run build
+  
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  on:
+    branch: gh-pages
